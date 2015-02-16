@@ -1,0 +1,45 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 10, 2015, 1:42:40 PM
+    Author     : mdeboer1
+*/
+body {background-color: #088da5;}
+
+#header {height: 120px;
+            text-align: center;
+            background-color: #999966;
+            width: 900px;
+            margin: 0 auto;}
+
+#container { width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            }
+
+#fullHotelList { padding-left: 30px;
+}
+
+#hList {height: 750px;
+        overflow-y: auto;
+        
+    }
+
+#editField { width: 575px;
+             height: 40vh;
+             padding-left: 75px;
+             padding-right: 75px;
+             float: left;   
+}
+
+#addHotel { width: 575px;
+            height: 41vh;
+            padding-left: 75px;
+            padding-right: 75px;
+            float: left;
+            margin-top: 40px;
+}
+
