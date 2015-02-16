@@ -5,9 +5,9 @@
  */
 package hotel.web.controller;
 
-import hotel.web.Hotel;
-import hotel.web.HotelDAOStrategy;
-import hotel.web.HotelDbService;
+import hotel.web.model.Hotel;
+import hotel.web.model.HotelDAOStrategy;
+import hotel.web.model.HotelDbService;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;

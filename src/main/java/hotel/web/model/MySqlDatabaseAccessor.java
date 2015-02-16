@@ -1,4 +1,4 @@
-package hotel.web;
+package hotel.web.model;
 
 
 import java.io.IOException;
