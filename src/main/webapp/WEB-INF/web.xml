@@ -7,11 +7,11 @@
     
     <context-param>
         <param-name>hotel.dao.strategy</param-name>
-        <param-value>hotel.web.MySqlHotelReportDAO</param-value>
+        <param-value>hotel.web.model.MySqlHotelReportDAO</param-value>
     </context-param>
     <context-param>
         <param-name>db.accessor.strategy</param-name>
-        <param-value>hotel.web.MySqlDatabaseAccessor</param-value>
+        <param-value>hotel.web.model.MySqlDatabaseAccessor</param-value>
     </context-param>
     <context-param>
         <param-name>driver.class</param-name>

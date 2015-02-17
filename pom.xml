@@ -50,16 +50,6 @@
                 <version>2.3</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <webResources>
-                        <resource>
-                            <directory>/src/main/webapp/WEB-INF</directory>
-                            <filtering>true</filtering>
-                            <includes>
-                                <include>WEB-INF/web.xml</include>
-                            </includes>
-                            <targetPath>WEB-INF</targetPath>
-                        </resource>
-                    </webResources>
                 </configuration>
             </plugin>
             <plugin>

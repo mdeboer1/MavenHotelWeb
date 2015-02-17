@@ -4,7 +4,7 @@
     Author     : mdeboer1
 --%>
 
-<%@page import="hotel.web.Hotel"%>
+<%@page import="hotel.web.model.Hotel"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
