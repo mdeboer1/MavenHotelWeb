@@ -71,7 +71,7 @@
                                 <input id="addState" name="addState" type="text" class="form-control" placeholder="Enter hotel state"><br>
                                 <input id="addZip" name="addZip"  type="text" class="form-control" placeholder="Enter hotel zip code"><br>
                                 <button id="addToList" name="addToList" class="btn btn-default" type="submit">Add hotel</button>
-                                <!--button id="submitToDb" name="submitToDb" class="btn btn-default" type="submit">Submit entries</button-->
+                                <button id="submitToDb" name="submitToDb" class="btn btn-default" type="submit">Submit entries</button>
                         </fieldset>
                     </form>
                 </div>    

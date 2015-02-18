@@ -246,17 +246,28 @@ public class MySqlDatabaseAccessor implements DatabaseAccessorStrategy {
             throws IOException, SQLException, ClassNotFoundException,
             BatchUpdateException{
         openConnection();
+        
+        PreparedStatement addHotels = null;
+        String sqlStatement = "INSERT INTO hotels (hotel_name, hotel_address, "
+                + "hotel_city, hotel_state, hotel_zip) values (?, ?, ?, ?, ?)";
+
         try {
             connection.setAutoCommit(false);
-            statement = connection.createStatement();
+            addHotels = connection.prepareStatement(sqlStatement);
             for (Map m : hotelList){
-                statement.addBatch("INSERT INTO hotels (hotel_name, hotel_address, "
-                    + "hotel_city, hotel_state, hotel_zip) values ('" + 
-                        m.get("hotel_name") + "', '" + m.get("hotel_address") +
-                        "', '" + m.get("hotel_city") + "', '" + m.get("hotel_state") 
-                        + "', '" + m.get("hotel_zip") + "')");
-            }
-            statement.executeBatch();
+                
+                addHotels.setObject(1, m.get("hotel_name").toString());
+                addHotels.setObject(2, m.get("hotel_address").toString());
+                addHotels.setObject(3, m.get("hotel_city").toString());
+                System.out.println(m.get("hotel_state").toString());
+                addHotels.setObject(4, m.get("hotel_state").toString());
+                System.out.println(m.get("hotel_zip").toString());
+                addHotels.setObject(5, m.get("hotel_zip").toString());
+                
+                addHotels.addBatch();
+
+        }
+            addHotels.executeBatch();
             connection.commit();
         }catch (BatchUpdateException b){
             

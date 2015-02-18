@@ -131,7 +131,7 @@ public class MySqlHotelReportDAO implements HotelDAOStrategy {
             map.put("hotel_address", hotel.getAddress());
             map.put("hotel_city", hotel.getCity());
             map.put("hotel_state", hotel.getState());
-            map.put("hotel_Zip", hotel.getZip());
+            map.put("hotel_zip", hotel.getZip());
             hotelList.add(map);
         }
 
