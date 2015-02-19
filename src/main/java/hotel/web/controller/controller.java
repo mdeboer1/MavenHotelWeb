@@ -177,7 +177,7 @@ public class controller extends HttpServlet {
         }
         }
         RequestDispatcher view =
-            request.getRequestDispatcher(RESULT_PAGE);
+            request.getRequestDispatcher(response.encodeURL(RESULT_PAGE));
         view.forward(request, response);
         
     }
