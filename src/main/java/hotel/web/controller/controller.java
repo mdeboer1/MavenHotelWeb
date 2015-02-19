@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -76,13 +77,16 @@ public class controller extends HttpServlet {
         //Crud operations
         String edit = request.getParameter("editHotel");
         String delete = request.getParameter("deleteHotel");
+        List<Hotel> listOfNewHotels = new ArrayList<>();
         String addHotel = request.getParameter("addToList");
+        String submitList = request.getParameter("submitToDb");
         String newHotelName = request.getParameter("editName");
         String newHotelAddress = request.getParameter("editAddress");
         String newHotelCity = request.getParameter("editCity");
         String newHotelState = request.getParameter("editState");
         String newHotelZip = request.getParameter("editZip");
         String hotelId = request.getParameter("hotelId");
+        HttpSession session = request.getSession();
         
         if (edit != null){
             try {
@@ -109,17 +113,40 @@ public class controller extends HttpServlet {
             }
         }
         else if (addHotel != null){
+            
             Hotel h = new Hotel(hotelCount, request.getParameter("addName"),
                 request.getParameter("addAddress"), request.getParameter("addCity"),
                 request.getParameter("addState"), request.getParameter("addZip"));
             hotelCount++;
-            if (service != null){
-                try {
-                    service.addHotel(h);
-                } catch (SQLException | ClassNotFoundException ex) {
-                    
-                }
+            
+            if(session.getAttribute("list") == null){
+                listOfNewHotels.add(h);
+                session.setAttribute("list", listOfNewHotels);
             }
+            else{
+                listOfNewHotels = (List)session.getAttribute("list");
+//            if (service != null){
+//                try {
+//                    service.addHotel(h);
+//                } catch (SQLException | ClassNotFoundException ex) {
+//                    
+//                }
+            listOfNewHotels.add(h);
+            session.setAttribute("list", listOfNewHotels);
+            }
+        }
+        
+        else if (submitList != null){
+            
+            List<Hotel> newHotels = (List)session.getAttribute("list");
+            try {
+                if (service != null){
+                    service.addHotels(newHotels);
+                }
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            session.invalidate();
         }
         //This section is used to get a List of all hotels and display them in the index.jsp
         List <Hotel> hotelList = null;
