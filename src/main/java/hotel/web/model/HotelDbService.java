@@ -6,8 +6,12 @@
 package hotel.web.model;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -23,15 +27,26 @@ public class HotelDbService {
             String password, String hotelDao, String dbAccessor)
             throws ClassNotFoundException, InstantiationException, 
             IllegalAccessException {
+        
         try{
             Class clazz = Class.forName(hotelDao);
-            dao = (HotelDAOStrategy)clazz.newInstance();
-            clazz = Class.forName(dbAccessor);
-            DatabaseAccessorStrategy database = (DatabaseAccessorStrategy)clazz.newInstance();
-            dao.setDatabaseProperties(database, driverClass, url, username, password);
+            Constructor constructor = clazz.getConstructor(new Class[]{String.class, String.class,
+                    String.class, String.class, String.class});
+            
+            
+//            dao = (HotelDAOStrategy)clazz.newInstance();
+            //Insert here the constructor code, dao = ....
+            dao = (HotelDAOStrategy)constructor.newInstance(dbAccessor, driverClass, url, username, 
+            password);
+            System.out.println("Here");
+//            clazz = Class.forName(dbAccessor);
+//            DatabaseAccessorStrategy database = (DatabaseAccessorStrategy)clazz.newInstance();
+//            dao.setDatabaseProperties(database, driverClass, url, username, password);
         } catch(ClassNotFoundException | InstantiationException 
                 | IllegalAccessException ex){
             
+        } catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(HotelDbService.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

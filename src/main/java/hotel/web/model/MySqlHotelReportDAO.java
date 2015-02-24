@@ -6,6 +6,8 @@
 package hotel.web.model;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -22,8 +24,21 @@ public class MySqlHotelReportDAO implements HotelDAOStrategy {
     
     private DatabaseAccessorStrategy database;
     
-    public MySqlHotelReportDAO(){
-        
+    public MySqlHotelReportDAO(String dbAccessor, String driverClass, String url, 
+            String username, String password) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+        try {
+            Class clazz = Class.forName(dbAccessor);
+            Constructor constructor = clazz
+                    .getConstructor(new Class[]{String.class, String.class, String.class, 
+                            String.class});
+            
+//             database = (DatabaseAccessorStrategy)clazz.newInstance();
+             database = (DatabaseAccessorStrategy)constructor.newInstance(driverClass, url, 
+            username, password);
+        } catch (NoSuchMethodException | SecurityException | ClassNotFoundException 
+                | InstantiationException | IllegalAccessException ex) {
+            
+        }
     }
     
     @Override

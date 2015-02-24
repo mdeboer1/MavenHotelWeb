@@ -34,8 +34,12 @@ public class MySqlDatabaseAccessor implements DatabaseAccessorStrategy {
     private String username;
     private String password;
     
-    public MySqlDatabaseAccessor(){
-        
+    public MySqlDatabaseAccessor(String driverClass, String url, String username, 
+            String password){
+        this.driverClass = driverClass;
+        this.url = url;
+        this.username = username;
+        this.password = password;
     }
     
     @Override
