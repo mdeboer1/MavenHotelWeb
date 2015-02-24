@@ -34,7 +34,7 @@
             <div class="row">
                 <div id="fullHotelList">
                     <form id="hotels" name="hotels" method="POST" action='<%= 
-                    response.encodeRedirectURL("/control")%>'>
+                    request.getContextPath()%>/control'>
                         <div class="col-md-4">
                             <fieldset>
                                 <legend>Hotel List</legend>
@@ -51,7 +51,7 @@
                 <div id="editDiv">        
                     <form id="userInteractionPanel" name="userInteractionPanel" 
                           method="POST" action='<%= 
-                    response.encodeRedirectURL("/control")%>'>
+                    request.getContextPath()%>/control'>
                         <div id="editField" class="col-md-8"><br>
                             <fieldset>
                                 <legend>Edit hotel information below</legend>
@@ -70,7 +70,7 @@
                 <div id="addHotel"class="col-md-8">
                     <form id="userInteractionPanel" name="userInteractionPanel" 
                           method="POST" action='<%= 
-                    response.encodeRedirectURL("/control")%>'>
+                    request.getContextPath()%>/control'>
                         <fieldset>
                             <legend>Enter the information to add hotels</legend>
                                 <input id="addName" name="addName" type="text" class="form-control" placeholder="Enter hotel name"><br>
