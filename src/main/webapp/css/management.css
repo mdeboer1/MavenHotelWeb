@@ -12,15 +12,15 @@ body {background-color: #088da5;}
 #header {height: 120px;
             text-align: center;
             background-color: #999966;
-            width: 900px;
+            width: 80%;
             margin: 0 auto;}
 
-#container { width: 900px;
+#container { width: 80%;
             margin: 0 auto;
             background-color: white;
             }
 
-#fullHotelList { padding-left: 30px;
+#fullHotelList { padding-left: 100px;
 }
 
 #hList {height: 750px;
@@ -30,16 +30,50 @@ body {background-color: #088da5;}
 
 #editField { width: 575px;
              height: 40vh;
-             padding-left: 75px;
-             padding-right: 75px;
-             float: left;   
+             /*padding-left: 100px;*/
+             padding-right: 100px;
+             float: right;   
 }
 
 #addHotel { width: 575px;
             height: 41vh;
-            padding-left: 75px;
-            padding-right: 75px;
-            float: left;
+            /*padding-left: 100px;*/
+            padding-right: 100px;
+            float: right;
             margin-top: 40px;
 }
 
+#lookupWizard  {padding-left: 30px;
+                padding-right: 30px; }
+
+.header-fixed {
+    width: 100% 
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 700px;
+}
+
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > th {
+    width: 20%;
+    float: left;
+}

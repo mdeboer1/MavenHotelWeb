@@ -31,19 +31,50 @@
                 <h1>Welcome to the hotel management system</h1>
         </header>
         <div id="container"><br>
+            <form class="form-inline">    
+                <div id="lookupWizard">
+                    <fieldset>
+                        <legend>Filter Hotels</legend>
+                        <input id="byId" name="byId" type="text" class="form-control" placeholder="Look up by id">
+                        <input id="byName" name="byName" type="text" class="form-control" placeholder="Look up by name">
+                        <input id="byAddress" name="byAddress" type="text" class="form-control" placeholder="Look up by address">
+                        <input id="byCity" name="byCity" type="text" class="form-control" placeholder="Look up by city">
+                        <input id="byState" name="byState" type="text" class="form-control" placeholder="Look up by state">
+                        <input id="byZip" name="byZip" type="text" class="form-control" placeholder="Look up by zip code">
+                        <button id="filter" name="filter" class="btn btn-default" type="submit">Filter hotels</button> 
+                    </fieldset>
+                </div>
+            </form><br><br>
             <div class="row">
                 <div id="fullHotelList">
                     <form id="hotels" name="hotels" method="POST" action='<%= 
                     response.encodeURL("control")%>'>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <fieldset>
                                 <legend>Hotel List</legend>
-                                    <ul id="hList" class="list-group" height="600px">
+                                <table class="table table-striped header-fixed">
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Zip</th>
+                                    </thead>
+                                    <tbody>
+                                    <!--ul id="hList" class="list-group" height="600px"-->
                                         <c:forEach var="hotel" items="${hotelNameList}" >
-                                            <li class="list-group-item">
-                                                <a href="control?id=${hotel.hotelId}">${hotel.hotelName}</a></li>
+                                            <!--li class="list-group-item"-->
+                                            <tr>
+                                                <td><a href="control?id=${hotel.hotelId}">${hotel.hotelName}</a></td>
+                                                <td>${hotel.address}</td>
+                                                <td>${hotel.city}</td>
+                                                <td>${hotel.state}</td>
+                                                <td>${hotel.zip}</td>
+                                            </tr>
                                         </c:forEach>
-                                    </ul>
+                                    <!--/ul-->
+                                    </tbody>
+                                </table>
                             </fieldset>
                         </div>
                     </form>
@@ -52,7 +83,7 @@
                     <form id="userInteractionPanel" name="userInteractionPanel" 
                           method="POST" action='<%= 
                     response.encodeURL("control")%>'>
-                        <div id="editField" class="col-md-8"><br>
+                        <div id="editField" class="col-md-6"><br>
                             <fieldset>
                                 <legend>Edit hotel information below</legend>
                                 <input type="hidden" id="hotelId" name="hotelId" value="<c:out value="${hotelToEdit.hotelId}"/>">
@@ -67,7 +98,7 @@
                         </div>
                     </form>
                 </div>
-                <div id="addHotel"class="col-md-8">
+                <div id="addHotel"class="col-md-6">
                     <form id="userInteractionPanel" name="userInteractionPanel" 
                           method="POST" action='<%= response.encodeURL("control")%>'>
                         <fieldset>
