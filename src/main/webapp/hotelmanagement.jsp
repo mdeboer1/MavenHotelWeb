@@ -41,7 +41,8 @@
                         <input id="byCity" name="byCity" type="text" class="form-control" placeholder="Look up by city">
                         <input id="byState" name="byState" type="text" class="form-control" placeholder="Look up by state">
                         <input id="byZip" name="byZip" type="text" class="form-control" placeholder="Look up by zip code">
-                        <button id="filter" name="filter" class="btn btn-default" type="submit">Filter hotels</button> 
+                        <button id="filter" name="filter" class="btn btn-default" type="submit">Filter hotels</button><br><br>
+                        <input type="checkbox" id="allHotels" name="allHotels">Select All Hotels<br>
                     </fieldset>
                 </div>
             </form><br><br>

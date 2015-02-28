@@ -96,11 +96,17 @@ public class HotelController extends HttpServlet {
         String hotelCity = request.getParameter("byCity");
         String hotelState = request.getParameter("byState");
         String hotelZip = request.getParameter("byZip");
+        String allHotels = request.getParameter("allHotels");
         
         if (filter != null){
             try{
                 String columnName = null;
                 String columnFilter = null;
+                if (allHotels != null){
+                    if (service != null){
+                        hotelList = service.retrieveHotels(hotelTableName);
+                    }
+                }
                 if (!hId.isEmpty()){
                     columnName = "hotel_id";
                     columnFilter = hId;
@@ -125,7 +131,7 @@ public class HotelController extends HttpServlet {
                     columnName = "hotel_zip";
                     columnFilter = hotelZip;
                 }
-                if (service != null){
+                if (service != null && allHotels == null){
                         hotelList = service.retrieveHotelsByColumnName(columnName, columnFilter);
                     }
             }catch (SQLException | ClassNotFoundException ex) {
