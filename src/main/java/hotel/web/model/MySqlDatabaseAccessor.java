@@ -67,6 +67,33 @@ public class MySqlDatabaseAccessor implements DatabaseAccessorStrategy {
         }
     }
     
+    public final List<Map<String, Object>> getHotelRecordsByColumnName(String 
+            columnName, String recordToMatch) throws IOException, SQLException, ClassNotFoundException{
+        openConnection();
+        List<Map<String, Object>> hotelRecords = new ArrayList<>();
+        PreparedStatement stmt;
+        String sqlStatement = "select * from hotels where "
+                + columnName + " = ?";
+
+        connection.setAutoCommit(false);
+        stmt = connection.prepareStatement(sqlStatement);
+        stmt.setString(1, recordToMatch);
+        result = stmt.executeQuery();
+
+        ResultSetMetaData metaData = result.getMetaData();	
+        final int fields = metaData.getColumnCount();
+        
+        while (result.next()){
+            Map<String,Object> record = new LinkedHashMap<>();
+                for( int i=1; i <= fields; i++ ) {
+                    record.put( metaData.getColumnName(i), result.getObject(i) );
+                } // end for
+                hotelRecords.add(record);
+        }
+        connection.commit();
+        return hotelRecords;
+        }
+    
     @Override
     public final List<Map<String, Object>> getAllHotelRecords(String tableName)
         throws SQLException, IOException, ClassNotFoundException {

@@ -30,6 +30,10 @@ public interface DatabaseAccessorStrategy {
             String newHotelState, String newHotelZip, int hotelId) throws 
             IOException, SQLException, ClassNotFoundException;
     
+    public abstract List<Map<String, Object>> getHotelRecordsByColumnName(String 
+            columnName, String recordToMatch) throws IOException, SQLException,
+            ClassNotFoundException;
+    
     public abstract List<Map<String, Object>> getOneHotelRecordById(int hotelId, String
             tableName) throws IOException, SQLException, ClassNotFoundException;
     

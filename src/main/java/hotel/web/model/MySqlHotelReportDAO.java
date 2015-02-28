@@ -49,6 +49,40 @@ public class MySqlHotelReportDAO implements HotelDAOStrategy {
     }
     
     @Override
+    public final List<Hotel> requestHotelRecordsByColumn(String 
+            columnName, String recordToMatch) throws IOException, SQLException,
+            ClassNotFoundException {
+        List<Map<String, Object>> records = null;
+        
+        try {
+            records = database.getHotelRecordsByColumnName(columnName, recordToMatch);
+        } catch (IOException | SQLException | ClassNotFoundException ex) {
+            
+        }
+        
+        List<Hotel> list = new ArrayList<>();
+        for (Map<String,Object> map : records){
+            Object obj = map.get("hotel_id");
+            String id = obj == null ? "Test" : obj.toString();
+            int hotelId = Integer.parseInt(id);
+            obj = map.get("hotel_name");
+            String hotelName = obj == null ? "Test" : obj.toString();
+            obj = map.get("hotel_address");
+            String hotelAddress = obj == null ? "Test" : obj.toString();
+            obj = map.get("hotel_city");
+            String hotelCity = obj == null ? "Test" : obj.toString();
+            obj = map.get("hotel_state");
+            String hotelState = obj == null ? "Test" : obj.toString();
+            obj = map.get("hotel_zip");
+            String hotelZip = obj == null ? "Test" : obj.toString();
+            Hotel hotel = new Hotel(hotelId, hotelName, hotelAddress, hotelCity,
+                    hotelState, hotelZip);
+            list.add(hotel);
+        }
+       return list;
+    }
+    
+    @Override
     public final List<Hotel> getHotelRecords(String tableName) throws 
             SQLException, IOException, ClassNotFoundException, NullPointerException{
         

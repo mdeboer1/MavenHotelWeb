@@ -14,6 +14,10 @@ import java.util.List;
  * @author mdeboer1
  */
 public interface HotelDAOStrategy {
+    
+    public abstract List<Hotel> requestHotelRecordsByColumn(String 
+            columnName, String recordToMatch) throws IOException, SQLException,
+            ClassNotFoundException; 
 
     public abstract List<Hotel> getHotelRecords(String tableName) throws 
             SQLException, IOException, ClassNotFoundException;

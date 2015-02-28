@@ -51,6 +51,17 @@ public class HotelDbService {
         
     }
     
+    public final List<Hotel> retrieveHotelsByColumnName(String columnName, String recordToMatch){
+        List<Hotel> records = null;
+        
+        try {
+            records = dao.requestHotelRecordsByColumn(columnName, recordToMatch);
+        } catch (IOException | SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(HotelDbService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return records;
+    }
+    
     public final List<Hotel> retrieveHotels(String tableName)throws 
             SQLException, IOException, ClassNotFoundException, NullPointerException {
         
