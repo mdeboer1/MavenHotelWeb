@@ -88,6 +88,52 @@ public class HotelController extends HttpServlet {
         String newHotelZip = request.getParameter("editZip");
         String hotelId = request.getParameter("hotelId");
         HttpSession session = request.getSession();
+        String filter = request.getParameter("filter");
+        List <Hotel> hotelList = null;
+        String hId = request.getParameter("byId");
+        String hotelName = request.getParameter("byName");
+        String hotelAddress = request.getParameter("byAddress");
+        String hotelCity = request.getParameter("byCity");
+        String hotelState = request.getParameter("byState");
+        String hotelZip = request.getParameter("byZip");
+        
+        if (filter != null){
+            try{
+                String columnName = null;
+                String columnFilter = null;
+                if (!hId.isEmpty()){
+                    columnName = "hotel_id";
+                    columnFilter = hId;
+                }
+                else if (!hotelName.isEmpty()){
+                    columnName = "hotel_name";
+                    columnFilter = hotelName;
+                }
+                else if (!hotelAddress.isEmpty()){
+                    columnName = "hotel_address";
+                    columnFilter = hotelAddress;
+                }
+                else if (!hotelCity.isEmpty()){
+                    columnName = "hotel_city";
+                    columnFilter = hotelCity;
+                }
+                else if (!hotelState.isEmpty()){
+                    columnName = "hotel_state";
+                    columnFilter = hotelState;
+                }
+                else if (!hotelZip.isEmpty()){
+                    columnName = "hotel_zip";
+                    columnFilter = hotelZip;
+                }
+                if (service != null){
+                        hotelList = service.retrieveHotelsByColumnName(columnName, columnFilter);
+                    }
+            }catch (SQLException | ClassNotFoundException ex) {
+                        //Logger.getLogger(HotelController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("hotelNameList", hotelList);
+        }    
+
         
         if (edit != null){
             try {
@@ -150,15 +196,16 @@ public class HotelController extends HttpServlet {
             session.invalidate();
         }
         //This section is used to get a List of all hotels and display them in the index.jsp
-        List <Hotel> hotelList = null;
-        try {
-            if (service != null){    
-                hotelList = service.retrieveHotels(hotelTableName);
+        if (filter == null){
+            try {
+                if (service != null){    
+                    hotelList = service.retrieveHotels(hotelTableName);
+                }
+            } catch (SQLException | ClassNotFoundException | NullPointerException ex) {
+
             }
-        } catch (SQLException | ClassNotFoundException | NullPointerException ex) {
-            
+            request.setAttribute("hotelNameList", hotelList);
         }
-        request.setAttribute("hotelNameList", hotelList);
         
         //This section retrieves the query string from the hotel name hyperlinks
         String[] query = request.getParameterValues("id");

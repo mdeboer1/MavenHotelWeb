@@ -67,6 +67,7 @@ public class MySqlDatabaseAccessor implements DatabaseAccessorStrategy {
         }
     }
     
+    @Override
     public final List<Map<String, Object>> getHotelRecordsByColumnName(String 
             columnName, String recordToMatch) throws IOException, SQLException, ClassNotFoundException{
         openConnection();
