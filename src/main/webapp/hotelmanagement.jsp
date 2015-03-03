@@ -42,7 +42,8 @@
                         <input id="byState" name="byState" type="text" class="form-control" placeholder="Look up by state">
                         <input id="byZip" name="byZip" type="text" class="form-control" placeholder="Look up by zip code">
                         <button id="filter" name="filter" class="btn btn-default" type="submit">Filter hotels</button><br><br>
-                        <input type="checkbox" id="allHotels" name="allHotels">Select All Hotels<br>
+                        <input type="checkbox" id="allHotels" name="allHotels">
+                        <label for="allHotels">Select All Hotels</label><br>
                     </fieldset>
                 </div>
             </form><br><br>
@@ -50,22 +51,24 @@
                 <div id="fullHotelList">
                     <form id="hotels" name="hotels" method="POST" action='<%= 
                     response.encodeURL("control")%>'>
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <fieldset>
                                 <legend>Hotel List</legend>
-                                <table class="table table-striped header-fixed">
+                                <table class="table table-striped header-fixed sortable">
                                     <thead>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Zip</th>
+                                        
+                                        <th class="sortable">Name</th>
+                                        <th class="sortable">Address</th>
+                                        <th class="sortable">City</th>
+                                        <th class="sortable">State</th>
+                                        <th class="sortable">Zip</th>
                                     </thead>
                                     <tbody>
                                     <!--ul id="hList" class="list-group" height="600px"-->
                                         <c:forEach var="hotel" items="${hotelNameList}" >
                                             <!--li class="list-group-item"-->
                                             <tr>
+                                                
                                                 <td><a href="control?id=${hotel.hotelId}">${hotel.hotelName}</a></td>
                                                 <td>${hotel.address}</td>
                                                 <td>${hotel.city}</td>
@@ -84,7 +87,7 @@
                     <form id="userInteractionPanel" name="userInteractionPanel" 
                           method="POST" action='<%= 
                     response.encodeURL("control")%>'>
-                        <div id="editField" class="col-md-6"><br>
+                        <div id="editField" class="col-md-5"><br>
                             <fieldset>
                                 <legend>Edit hotel information below</legend>
                                 <input type="hidden" id="hotelId" name="hotelId" value="<c:out value="${hotelToEdit.hotelId}"/>">
@@ -99,7 +102,7 @@
                         </div>
                     </form>
                 </div>
-                <div id="addHotel"class="col-md-6">
+                <div id="addHotel"class="col-md-5">
                     <form id="userInteractionPanel" name="userInteractionPanel" 
                           method="POST" action='<%= response.encodeURL("control")%>'>
                         <fieldset>
@@ -118,5 +121,7 @@
         </div>
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>            
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="resources/js/bootstrap-sortable.js"></script>
+        <script src="js/hotel.js" type="text/javascript"></script>
     </body>
 </html>
