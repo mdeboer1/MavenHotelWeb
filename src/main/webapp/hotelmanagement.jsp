@@ -56,7 +56,6 @@
                                 <legend>Hotel List</legend>
                                 <table class="table table-striped header-fixed sortable">
                                     <thead>
-                                        
                                         <th class="sortable">Name</th>
                                         <th class="sortable">Address</th>
                                         <th class="sortable">City</th>
@@ -68,7 +67,6 @@
                                         <c:forEach var="hotel" items="${hotelNameList}" >
                                             <!--li class="list-group-item"-->
                                             <tr>
-                                                
                                                 <td><a href="control?id=${hotel.hotelId}">${hotel.hotelName}</a></td>
                                                 <td>${hotel.address}</td>
                                                 <td>${hotel.city}</td>
