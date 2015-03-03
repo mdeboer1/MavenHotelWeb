@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
 public class HotelController extends HttpServlet {
     private static final String RESULT_PAGE = "/hotelmanagement.jsp"; 
     private static String hotelTableName = "hotels";
+    private static boolean isNewServlet = true;
     
     int hotelCount;
     /**
@@ -97,6 +98,7 @@ public class HotelController extends HttpServlet {
         String hotelState = request.getParameter("byState");
         String hotelZip = request.getParameter("byZip");
         String allHotels = request.getParameter("allHotels");
+        HttpSession session3 = request.getSession();
         
         if (filter != null){
             try{
@@ -138,6 +140,7 @@ public class HotelController extends HttpServlet {
                         //Logger.getLogger(HotelController.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.setAttribute("hotelNameList", hotelList);
+            session3.setAttribute("hotelNameList", hotelList);
         }    
 
         
@@ -153,6 +156,7 @@ public class HotelController extends HttpServlet {
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(HotelController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            hotelList = new ArrayList<>();
         }
         else if (delete != null){
             try {
@@ -164,6 +168,7 @@ public class HotelController extends HttpServlet {
             } catch (NumberFormatException | SQLException | ClassNotFoundException ex) {
                 
             }
+            hotelList = new ArrayList<>();
         }
         else if (addHotel != null){
             
@@ -218,18 +223,18 @@ public class HotelController extends HttpServlet {
         Hotel hotel = null;
         
         if (query != null){
-        try {
-            id = Integer.parseInt(query[0]);
-            for(Hotel h : hotelList){
-                if (id == h.getHotelId()){
-                    hotel = h;
+            try {
+                id = Integer.parseInt(query[0]);
+                for(Hotel h : hotelList){
+                    if (id == h.getHotelId()){
+                        hotel = h;
+                    }
                 }
+                request.setAttribute("hotelToEdit", hotel);
+            } catch (NumberFormatException e){
+
             }
-            request.setAttribute("hotelToEdit", hotel);
-        } catch (NumberFormatException e){
-            
-        }
-        }
+            }
         RequestDispatcher view =
             request.getRequestDispatcher(response.encodeURL(RESULT_PAGE));
         view.forward(request, response);
