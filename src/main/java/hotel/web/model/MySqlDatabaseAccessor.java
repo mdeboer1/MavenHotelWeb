@@ -29,11 +29,14 @@ public class MySqlDatabaseAccessor implements DatabaseAccessorStrategy {
     private Connection connection;
     private Statement statement;
     private ResultSet result;
+    //Eliminate these 4 properties
     private String driverClass;
     private String url;
     private String username;
     private String password;
+    //Create a private DataSource property
     
+    //Modify constructor to accept a DataSource object rather than Strings
     public MySqlDatabaseAccessor(String driverClass, String url, String username, 
             String password){
         this.driverClass = driverClass;
@@ -42,6 +45,7 @@ public class MySqlDatabaseAccessor implements DatabaseAccessorStrategy {
         this.password = password;
     }
     
+    //This method is no longer needed/used
     @Override
     public final void setConnectionVariables(String driverClass, String url, String username, 
             String password) throws NullPointerException{
@@ -51,6 +55,7 @@ public class MySqlDatabaseAccessor implements DatabaseAccessorStrategy {
         this.password = password;
     }
     
+    //Modify this method to us the DataSource object
     @Override
     public final void openConnection() throws IOException, SQLException, ClassNotFoundException{
         Class.forName(driverClass);
